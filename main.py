@@ -173,7 +173,7 @@ class Interface:
             ("icons/pen.png", 200, 0, 20),
             ("icons/erase.png", 300, 0, 20),
             ("icons/cube.png", 400, 0, 20),
-            ("icons/circle.png", 500, 0, 20),
+            ("icons/circle.png", 500, 2, 18),
             ("icons/power.png", 1170, 5, 20),
         ]
         for path, x, y, percent in icons:
@@ -204,6 +204,23 @@ class MainLoop:
                 for hand_lms in res.multi_hand_landmarks:
                     self.hand_detector.draw(frame, hand_lms)
                     self.handle_fingers(frame, hand_lms, w, h)
+                    index_finger = hand_lms.landmark[8]
+                    index_finger_x = int(index_finger.x * w)
+                    index_finger_y = int(index_finger.y * h)
+                    cv2.putText(
+                        frame,
+                        f"Index Finger: ({index_finger_x}, {index_finger_y})",
+                        (10, 30),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.5,
+                        (255, 255, 255),
+                        1,
+                    )
+                    if (index_finger_x > 1090 and index_finger_x < 1240) and (
+                        index_finger_y < 80 and index_finger_y > 20
+                    ):
+                        self.stop = True
+                        break
 
             self.objects.draw_objects(frame)
             cv2.imshow(WINDOW_NAME, frame)
