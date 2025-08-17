@@ -305,7 +305,7 @@ if __name__ == "__main__":
     try:
         logo_video("videos/inicial.mp4")
         loop()
-        logo_video("videos/final.mp4")
+        #logo_video("videos/final.mp4")
     except Exception as e:
         print(f"Erro: {e}")
     finally:
