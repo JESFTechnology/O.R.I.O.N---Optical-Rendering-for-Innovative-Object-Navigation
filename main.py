@@ -265,7 +265,6 @@ def play_video(path):
                 break
     finally:
         cap.release()
-        cv2.destroyAllWindows()
 
 
 # -------------------
@@ -277,7 +276,6 @@ if __name__ == "__main__":
     video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, VideoConfig.HEIGHT)
     cv2.namedWindow(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty(WINDOW_NAME, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
     project_json = modules.openProject()
     project_objects = ProjectObjects(project_json)
     hand_detector = HandDetector()
