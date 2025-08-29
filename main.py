@@ -169,7 +169,7 @@ def menu(frame, finger_x: int = -1, finger_y: int = -1):
             # design.start()
             codeMenu = 0
         case 3:
-            design.start()
+            design.start(WINDOW_NAME)
             codeMenu = 0
         case _:
             codeMenu = 0

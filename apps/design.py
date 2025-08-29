@@ -3,11 +3,9 @@ import math
 import cv2
 import mediapipe as mp
 import numpy as np
-import modules
+import apps.modules as modules
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
-WINDOW_NAME = "ORION - DESIGN"
 
 
 # -------------------
@@ -172,10 +170,11 @@ class Interface:
 # LOOP PRINCIPAL
 # -------------------
 class MainLoop:
-    def __init__(self, video_capture, project_objects, hand_detector):
+    def __init__(self, video_capture, project_objects, hand_detector, WINDOW_NAME):
         self.capture = video_capture
         self.objects = project_objects
         self.hand_detector = hand_detector
+        self.WINDOW_NAME = WINDOW_NAME
         self.stop = False
 
     def run(self):
@@ -224,7 +223,7 @@ class MainLoop:
                         break
 
             self.objects.draw_objects(frame)
-            cv2.imshow(WINDOW_NAME, frame)
+            cv2.imshow(self.WINDOW_NAME, frame)
             if (cv2.waitKey(1) & 0xFF == ord("q")) or self.stop:
                 break
 
@@ -273,7 +272,7 @@ class MainLoop:
 # -------------------
 # MAIN
 # -------------------
-def start():
+def start(WINDOW_NAME):
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.CAP_PROP_FRAME_WIDTH, VideoConfig.WIDTH)
     video_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, VideoConfig.HEIGHT)
@@ -284,7 +283,7 @@ def start():
     project_json = modules.openProject()
     project_objects = ProjectObjects(project_json)
     hand_detector = HandDetector()
-    main_loop = MainLoop(video_capture, project_objects, hand_detector)
+    main_loop = MainLoop(video_capture, project_objects, hand_detector, WINDOW_NAME)
 
     try:
         main_loop.run()

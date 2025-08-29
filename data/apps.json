@@ -1,5 +1,5 @@
 [
-{
+    {
         "name": "Design",
         "icon": "icons/app1.png",
         "path": "apps/design.py",
