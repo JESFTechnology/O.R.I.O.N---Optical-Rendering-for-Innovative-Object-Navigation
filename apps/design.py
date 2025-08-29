@@ -271,29 +271,6 @@ class MainLoop:
 
 
 # -------------------
-# FUNÇÃO DE VÍDEO DE LOGO
-# -------------------
-def play_video(path):
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Não achei: {path}")
-    cap = cv2.VideoCapture(path)
-    if not cap.isOpened():
-        raise RuntimeError("Falha ao abrir o vídeo. Verifica codecs/FFmpeg.")
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    delay = int(1000 / fps) if fps else 33
-    try:
-        while True:
-            ok, frame = cap.read()
-            if not ok:
-                break
-            cv2.imshow(WINDOW_NAME, frame)
-            if cv2.waitKey(delay) & 0xFF in (27, ord("q")):
-                break
-    finally:
-        cap.release()
-
-
-# -------------------
 # MAIN
 # -------------------
 def start():
@@ -310,7 +287,6 @@ def start():
     main_loop = MainLoop(video_capture, project_objects, hand_detector)
 
     try:
-        play_video("videos/inicial.mp4")
         main_loop.run()
     except Exception as e:
         print(f"Erro: {e}")

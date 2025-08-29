@@ -3,6 +3,7 @@ import subprocess
 import numpy as np
 import mediapipe as mp
 import json
+import os
 from apps import design, update
 
 
@@ -257,5 +258,26 @@ def main():
     cv2.destroyAllWindows()
 
 
+def play_video(path):
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Não achei: {path}")
+    cap = cv2.VideoCapture(path)
+    if not cap.isOpened():
+        raise RuntimeError("Falha ao abrir o vídeo. Verifica codecs/FFmpeg.")
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    delay = int(1000 / fps) if fps else 33
+    try:
+        while True:
+            ok, frame = cap.read()
+            if not ok:
+                break
+            cv2.imshow(WINDOW_NAME, frame)
+            if cv2.waitKey(delay) & 0xFF in (27, ord("q")):
+                break
+    finally:
+        cap.release()
+
+
 if __name__ == "__main__":
+    play_video("videos/inicial.mp4")
     main()
