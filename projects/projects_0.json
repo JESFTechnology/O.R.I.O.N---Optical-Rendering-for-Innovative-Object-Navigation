@@ -1,0 +1,41 @@
+{
+    "name": "Blueprint",
+    "desc": "New Project",
+    "objects": [
+        {
+            "name": "Cube",
+            "type": "Local",
+            "x": 950,
+            "y": 264,
+            "size": 30,
+            "rgb": [
+                0,
+                255,
+                0
+            ]
+        },
+        {
+            "name": "Cube",
+            "type": "Local",
+            "x": 144,
+            "y": 469,
+            "size": 30,
+            "rgb": [
+                0,
+                255,
+                0
+            ]
+        }
+    ],
+    "draw": [
+        {
+            "name": "1",
+            "points": [
+                {
+                    "x": 0,
+                    "y": 0
+                }
+            ]
+        }
+    ]
+}

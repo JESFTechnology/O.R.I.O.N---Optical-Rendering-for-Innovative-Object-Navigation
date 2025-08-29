@@ -1,0 +1,16 @@
+[
+{
+        "name": "Design",
+        "icon": "icons/app1.png",
+        "path": "apps/design.py",
+        "y": 20,
+        "percent": 20
+    },
+    {
+        "name": "Scanner",
+        "icon": "icons/app2.png",
+        "path": "apps/scannerWithLaser.py",
+        "y": 25,
+        "percent": 18
+    }
+]
